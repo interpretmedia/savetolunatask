@@ -1,4 +1,4 @@
-## Save to LunaTask — Chrome Extension v2.1
+## Save to LunaTask — Chrome Extension v2.2
 
 Select text on any webpage or web app → right-click → save directly to LunaTask.
 
