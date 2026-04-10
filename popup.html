@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LunaTask — Save Current Page</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:13px;-webkit-font-smoothing:antialiased}
+:root {
+  --bg:#ffffff; --bg-2:#f8f9fa; --bg-3:#f1f3f4; --border:#dadce0; --border-2:#e8eaed;
+  --text:#202124; --text-2:#5f6368; --text-3:#80868b; --text-4:#bdc1c6;
+  --accent:#1a73e8; --accent-h:#1557b0; --accent-bg:rgba(26,115,232,.12);
+  --success:#137333; --success-bg:#e6f4ea; --error:#c5221f; --error-bg:#fce8e6;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:#202124; --bg-2:#292a2d; --bg-3:#35363a; --border:#3c4043; --border-2:#2d2e31;
+    --text:#e8eaed; --text-2:#9aa0a6; --text-3:#5f6368; --text-4:#3c4043;
+    --accent:#8ab4f8; --accent-h:#aecbfa; --accent-bg:rgba(138,180,248,.12);
+    --success:#81c995; --success-bg:#1e3a2a; --error:#f28b82; --error-bg:#3a1e1e;
+  }
+}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);width:420px;min-height:240px;max-height:640px;overflow-y:auto;
+}
+.header{display:flex;align-items:center;gap:10px;padding:13px 14px;border-bottom:1px solid var(--border);background:var(--bg-2)}
+.logo{width:28px;height:28px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hd-title{font-size:13.5px;font-weight:600;color:var(--text)}
+.hd-sub{font-size:11px;color:var(--text-3);margin-top:1px}
+.wrap{padding:14px}
+.card{background:var(--bg-2);border:1px solid var(--border-2);border-radius:8px;padding:12px;margin-bottom:14px}
+.label{display:block;font-size:10.5px;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.page-title{font-size:13px;font-weight:600;color:var(--text);line-height:1.45;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.page-url{font-size:11.5px;color:var(--accent);word-break:break-all;line-height:1.5}
+.field{margin-bottom:12px}
+.field:last-child{margin-bottom:0}
+select,input[type=text],textarea{
+  width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 10px;
+  color:var(--text);font-size:13px;font-family:inherit;outline:none;transition:border-color .15s,box-shadow .15s;
+}
+select:focus,input[type=text]:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-bg)}
+select.error,input.error{border-color:var(--error);box-shadow:0 0 0 2px rgba(217,48,37,.12)}
+.help{font-size:11.5px;color:var(--text-3);line-height:1.45;margin-top:5px}
+.row{display:flex;gap:8px}
+.row > *{flex:1}
+.segment{display:flex;gap:8px;margin-bottom:14px}
+.seg-btn{
+  flex:1;background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:9px 12px;
+  color:var(--text-2);cursor:pointer;font-size:12.5px;font-weight:500;transition:all .15s;
+}
+.seg-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.seg-btn:hover:not(.active){background:var(--bg-3)}
+.actions{display:flex;gap:8px;margin-top:14px}
+.btn{
+  flex:1;padding:9px 14px;border-radius:7px;font-size:13px;font-weight:500;cursor:pointer;
+  border:1px solid transparent;font-family:inherit;transition:background .15s,border-color .15s;
+}
+.btn-secondary{background:var(--bg);border-color:var(--border);color:var(--text-2)}
+.btn-secondary:hover{background:var(--bg-3)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover:not(:disabled){background:var(--accent-h)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed}
+.status{margin-top:12px;font-size:12px;display:none}
+.status.show{display:block}.status.ok{color:var(--success)}.status.err{color:var(--error)}
+.append-note{font-size:11px;color:var(--success);margin-top:5px;display:none}
+.footer-link{margin-top:12px;text-align:center}
+.footer-link button{background:none;border:none;color:var(--accent);font-size:11.5px;cursor:pointer}
+.hidden{display:none !important}
+</style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="white"/></svg>
+    </div>
+    <div>
+      <div class="hd-title">Save current page</div>
+      <div class="hd-sub">Send this page link to LunaTask</div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="card">
+      <label class="label">Current page</label>
+      <div class="page-title" id="pageTitle">Loading page title…</div>
+      <div class="page-url" id="pageUrl">Loading URL…</div>
+    </div>
+
+    <div class="segment">
+      <button class="seg-btn active" id="modeNote">Save as Note</button>
+      <button class="seg-btn" id="modeTask">Save as Task</button>
+    </div>
+
+    <div id="panelNote">
+      <div class="field">
+        <label class="label" for="noteSel">Destination note</label>
+        <select id="noteSel"><option value="">— Select a note —</option></select>
+        <div class="append-note" id="appendHint">↩ This will append below previous entries in this note</div>
+        <div class="help">Choose one of your configured capture notes.</div>
+      </div>
+    </div>
+
+    <div id="panelTask" class="hidden">
+      <div class="field">
+        <label class="label" for="taskName">Task name</label>
+        <input type="text" id="taskName" placeholder="Use page title as task name">
+      </div>
+      <div class="field">
+        <label class="label" for="areaSel">Area of Life</label>
+        <select id="areaSel"><option value="">— Select an area —</option></select>
+      </div>
+      <div class="field">
+        <label class="label" for="goalSel">Goal (optional)</label>
+        <select id="goalSel"><option value="">— No goal —</option></select>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-secondary" id="openSettings">Settings</button>
+      <button class="btn btn-primary" id="saveBtn">Save to LunaTask</button>
+    </div>
+    <div class="status" id="status"></div>
+    <div class="footer-link"><button id="reloadPageInfo">Refresh page info</button></div>
+  </div>
+
+<script src="popup.js"></script>
+</body>
+</html>
