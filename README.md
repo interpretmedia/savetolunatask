@@ -1,4 +1,4 @@
-# Save to LunaTask — Chrome Extension v2.1
+on# Save to LunaTask — Chrome Extension v2.1
 
 Select text on any webpage or web app → right-click → save directly to LunaTask.
 
@@ -9,7 +9,7 @@ Select text on any webpage or web app → right-click → save directly to LunaT
 ## Install
 1. `chrome://extensions/` → enable **Developer mode**
 2. **Load unpacked** → select this folder
-3. Click the 🌙 icon → configure settings
+3. Click the extension icon → configure settings
 
 ## Settings Tabs
 | Tab | What to add |
