@@ -1,13 +1,14 @@
 {
   "manifest_version": 3,
   "name": "Save to LunaTask",
-  "version": "2.0.0",
-  "description": "Select text \u2192 right-click \u2192 save to LunaTask as a Note or Task",
+  "version": "2.3.0",
+  "description": "Save selected text or the current page link to LunaTask as notes or tasks.",
   "permissions": [
-    "contextMenus",
-    "storage",
     "activeTab",
-    "scripting"
+    "contextMenus",
+    "scripting",
+    "storage",
+    "tabs"
   ],
   "host_permissions": [
     "https://api.lunatask.app/*"
@@ -17,7 +18,7 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "LunaTask Settings",
+    "default_title": "Save to LunaTask",
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",
@@ -25,7 +26,7 @@
     }
   },
   "options_ui": {
-    "page": "popup.html",
+    "page": "options.html",
     "open_in_tab": true
   },
   "content_scripts": [
