@@ -1,16 +1,15 @@
-## Save to LunaTask — Chrome Extension v2.2
+# Save to LunaTask — Chrome Extension v2
 
 Select text on any webpage or web app → right-click → save directly to LunaTask.
 
 ## Context Menu
 - **Save as Note…** → pick a configured note; repeated saves **append** below previous captures
 - **Save as Task…** → pick an Area (required) + Goal (optional) + set task name
-<img width="1481" height="602" alt="Screenshot_20260411_130545" src="https://github.com/user-attachments/assets/e8f9607c-474d-46f9-a643-17e146ecf3ae" />
 
 ## Install
 1. `chrome://extensions/` → enable **Developer mode**
 2. **Load unpacked** → select this folder
-3. Click the extension icon → configure settings
+3. Click the 🌙 icon → configure settings
 
 ## Settings Tabs
 | Tab | What to add |
@@ -30,9 +29,6 @@ LunaTask, as those edits will be overwritten on the next save from this extensio
 - `Esc` — close
 - `Ctrl/⌘ + Enter` — save
 
-## Dark Mode
-The popup (settings page) and the in-page modal both fully respect `prefers-color-scheme`. If your OS or Chrome is set to dark mode, everything adapts automatically — no toggle needed.
-
 ## Compatibility
 Uses **Shadow DOM** for the modal — fully isolated from page styles/scripts. Works on all
 pages including SPAs, React/Vue/Angular web apps, Gmail, Notion, Linear, etc.
@@ -41,12 +37,3 @@ pages including SPAs, React/Vue/Angular web apps, Gmail, Notion, Linear, etc.
 - **Note**: Open note → ⋯ → Share/Copy link → extract UUID from URL
 - **Area**: Open area → ⋯ → Settings → UUID in URL
 - **Goal**: Open goal → ⋯ → Settings → UUID in URL
-
-
-## Toolbar Popup (v2.2)
-Single-clicking the extension icon opens a quick panel for the **current tab**.
-
-- Save current page link as **Note**
-- Save current page link as **Task**
-- Reuses configured Notes / Areas / Goals
-- Detects active tab title + URL via Chrome tabs API
