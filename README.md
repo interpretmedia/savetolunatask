@@ -5,7 +5,7 @@ Select text on any webpage or web app → right-click → save directly to LunaT
 ## Context Menu
 - **Save as Note…** → pick a configured note; repeated saves **append** below previous captures
 - **Save as Task…** → pick an Area (required) + Goal (optional) + set task name
-
+<img width="1481" height="602" alt="Screenshot_20260411_130545" src="https://github.com/user-attachments/assets/e8f9607c-474d-46f9-a643-17e146ecf3ae" />
 ## Install
 1. `chrome://extensions/` → enable **Developer mode**
 2. **Load unpacked** → select this folder
